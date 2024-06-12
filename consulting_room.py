@@ -1,5 +1,5 @@
 class User:
-    def __init__(self,nome,idade,cpf,cep,senha):
+    def __init__(self, nome, idade, cpf, cep, senha):
         self.nome = nome
         self.idade = idade
         self.cpf = cpf
@@ -7,7 +7,7 @@ class User:
         self.senha = senha
 
 class Admin(User):
-    def __init__(self, nome, idade, cpf, cep,cnpj,senha):
+    def __init__(self, nome, idade, cpf, cep, cnpj, senha):
         super().__init__(nome, idade, cpf, cep,senha)
         self.cnpj = cnpj
         self.secretario = []
@@ -15,14 +15,14 @@ class Admin(User):
     def autenticar(self,senha):
         return self.senha == senha
     
-    def adicionar_secretario(self,secretario):
+    def adicionar_secretario(self, secretario):
         self.secretario.append(secretario)
         print(f'secretario(a) {secretario.nome} adicionado(a).')
 
 class Secretario(User):
-    def __init__(self, nome, idade, cpf, cep, senha,id):
+    def __init__(self, nome, idade, cpf, cep, senha, num_id):
         super().__init__(nome, idade, cpf, cep, senha)
-        self.id = id
+        self.num_id = num_id
         self.pacientes = []
         self.medicos = []
         self.agenda_medica = []
@@ -30,11 +30,11 @@ class Secretario(User):
     def autenticar(self,senha):
         return self.senha == senha
     
-    def adicionar_pacientes(self,paciente):
+    def adicionar_pacientes(self, paciente):
         self.pacientes.append(paciente)
         print(f'Paciente {paciente.nome} adicionado.')
         
-    def adicionar_medicos(self,medico):
+    def adicionar_medicos(self, medico):
         self.medicos.append(medico)
         print(f'Médico {medico.nome} adicionado.')
 
@@ -53,13 +53,17 @@ class Secretario(User):
         self.agenda_medica.append(compromisso)
         print(f'Compromisso {compromisso} marcado.')
 
+    def marcar_consultas(self, paciente, consulta):
+        paciente.consultas.append(consulta)
+        print(f'Consulta {consulta} marcada para {paciente.nome}.')
+
 class Medico(User):
-    def __init__(self, nome, idade, cpf, cep, senha,medicamentos = None, exames = None):
+    def __init__(self, nome, idade, cpf, cep, senha, medicamentos = None, exames = None):
         super().__init__(nome, idade, cpf, cep, senha)
         self.medicamentos = medicamentos if medicamentos is not None else []
         self.exames = exames if exames is not None else []
     
-    def autenticar(self,senha):
+    def autenticar(self, senha):
         return self.senha == senha
     
     def agendar_consulta(self, consulta):
