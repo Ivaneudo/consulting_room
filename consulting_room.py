@@ -53,11 +53,14 @@ class Secretario(User):
         self.agenda_medica.append(compromisso)
         print(f'Compromisso {compromisso} marcado.')
 
-    def alterar_dados_do_paciente(self, nome, novos_dados):
-        paciente = self.buscar_pacientes(nome)
-        if paciente:
-            for chave, valor in novos_dados.items():
-                setattr(paciente, chave, valor)
-            print(f'Dados do paciente {nome} atualizados.')
-        else:
-            print(f'Paciente {nome} não encontrado.')
+class Medico(User):
+    def __init__(self, nome, idade, cpf, cep, senha,medicamentos = None, exames = None):
+        super().__init__(nome, idade, cpf, cep, senha)
+        self.medicamentos = medicamentos if medicamentos is not None else []
+        self.exames = exames if exames is not None else []
+    
+    def autenticar(self,senha):
+        return self.senha == senha
+    
+    def agendar_consulta(self, consulta):
+        print(f'Consulta {consulta} agendada por {self.nome}.')
