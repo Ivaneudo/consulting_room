@@ -129,10 +129,6 @@ class Medico(User):
         self.medicamentos = medicamentos if medicamentos is not None else []
         self.exames = exames if exames is not None else []
 
-    # Realiza cirurgias (função placeholder)
-    def realizar_cirurgias(self):
-        print(f'{self.nome} está realizando cirurgias.')
-
     # Realiza exames para um paciente
     def realizar_exames(self, secretario, nome_paciente, exame):
         paciente = secretario.busca_paciente(nome_paciente)
