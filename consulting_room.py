@@ -56,15 +56,13 @@ class Secretario(User):
         for medico in self.medicos:
             if medico.nome == nome:
                 return medico
-        return None
 
     # Busca um paciente pelo nome
     def busca_paciente(self, nome):
         for paciente in self.pacientes:
             if paciente.nome == nome:
                 return paciente
-        return None
-
+        
     # Verifica a agenda médica
     def verificar_agenda_medica(self):
         return self.agenda_medica
